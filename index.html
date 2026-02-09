@@ -3,79 +3,71 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-    <style>
-        body {
-            background-color: #121212;
-            color: #ffffff;
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-        }
-        header {
-            display: flex;
-            justify-content: space-between;
-            padding: 20px;
-            background-color: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-        }
-        .dashboard {
-            padding: 20px;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 20px;
-        }
-        .card {
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 15px;
-            padding: 20px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-            transition: transform 0.2s;
-        }
-        .card:hover {
-            transform: scale(1.05);
-        }
-        .chart {
-            width: 100%;
-            height: 250px;
-        }
-        .user-management {
-            margin-top: 20px;
-        }
-    </style>
+    <title>Access System</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/chart.js/3.7.1/chart.min.js"></script>
 </head>
 <body>
-    <header>
-        <h1>Dashboard</h1>
-        <nav>
-            <i class="fas fa-user"></i> User Management
-        </nav>
-    </header>
-    <main class="dashboard">
-        <div class="card">
-            <h2>Real-Time Event Monitoring</h2>
-            <div class="chart" id="eventMonitoringChart"></div>
+    <div class="sidebar">
+        <h2>User Management</h2>
+        <button id="connectButton">Connect</button>
+        <div class="notifications">
+            <label>
+                <input type="checkbox" id="notificationToggle"> Enable Notifications
+            </label>
         </div>
-        <div class="card">
-            <h2>Statistics</h2>
-            <div class="chart" id="statisticsChart"></div>
-        </div>
-        <div class="card user-management">
-            <h2>User Management for RFID Cards</h2>
-            <p>Manage user access through RFID cards.</p>
-        </div>
-    </main>
+    </div>
+    <div class="main-content">
+        <h1>Event History</h1>
+        <table id="eventHistoryTable">
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Event</th>
+                    <th>User</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Event rows will be dynamically inserted here -->
+            </tbody>
+        </table>
+        <canvas id="statisticsChart"></canvas>
+    </div>
     <script>
-        // Replace this with real chart drawing logic
-        function drawChart(chartId) {
-            const canvas = document.getElementById(chartId);
-            const ctx = canvas.getContext('2d');
-            ctx.fillStyle = 'rgba(0, 255, 0, 0.5)';
-            ctx.fillRect(0, 0, canvas.width, canvas.height);
+        // Auto-refresh event history table every 5 seconds
+        setInterval(refreshEventHistory, 5000);
+
+        function refreshEventHistory() {
+            // Fetch and update the event history
+            // AJAX call to get event data
         }
-        drawChart('eventMonitoringChart');
-        drawChart('statisticsChart');
+
+        // Chart setup
+        const ctx = document.getElementById('statisticsChart').getContext('2d');
+        const statisticsChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: [], // Add labels here
+                datasets: [{
+                    label: 'Event Statistics',
+                    data: [], // Add data points here
+                    borderColor: 'rgba(75, 192, 192, 1)',
+                    borderWidth: 1,
+                }]
+            },
+            options: {
+                animations: {
+                    tension: {
+                        duration: 1000,
+                        easing: 'easeInOutElastic',
+                        from: 1,
+                        to: 0,
+                        loop: true
+                    }
+                }
+            }
+        });
     </script>
 </body>
 </html>
