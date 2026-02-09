@@ -1,78 +1,81 @@
 <!DOCTYPE html>
-<html lang="cs">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Přístupový Systém - Smart Door Lock</title>
-    <link rel="stylesheet" href="css/style.css">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        body {
+            background-color: #121212;
+            color: #ffffff;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            display: flex;
+            justify-content: space-between;
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+        }
+        .dashboard {
+            padding: 20px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        .card {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            transition: transform 0.2s;
+        }
+        .card:hover {
+            transform: scale(1.05);
+        }
+        .chart {
+            width: 100%;
+            height: 250px;
+        }
+        .user-management {
+            margin-top: 20px;
+        }
+    </style>
 </head>
 <body>
-    <header class="header">
-        <h1>🔐 Přístupový Systém - Chytrý Dveřní Zámek</h1>
-        <p>Monitorování a správa přístupu v reálném čase</p>
+    <header>
+        <h1>Dashboard</h1>
+        <nav>
+            <i class="fas fa-user"></i> User Management
+        </nav>
     </header>
-
-    <div class="container">
-        <!-- Connection Status -->
+    <main class="dashboard">
         <div class="card">
-            <h2>Stav Připojení</h2>
-            <p id="connection-status" class="status-text">❌ Odpojeno</p>
-            <button class="button" id="connect-btn">Připojit micro:bit</button>
+            <h2>Real-Time Event Monitoring</h2>
+            <div class="chart" id="eventMonitoringChart"></div>
         </div>
-
-        <!-- Live Event Feed -->
         <div class="card">
-            <h2>📊 Live Feed Událostí</h2>
-            <div id="live-feed" class="feed-container">
-                <p class="empty-message">Čekání na události...</p>
-            </div>
+            <h2>Statistics</h2>
+            <div class="chart" id="statisticsChart"></div>
         </div>
-
-        <!-- Event History Table -->
-        <div class="card full-width">
-            <h2>📋 Historie Přístupu</h2>
-            <table class="event-table">
-                <thead>
-                    <tr>
-                        <th>Čas</th>
-                        <th>Uživatel (RFID)</th>
-                        <th>Typ Události</th>
-                        <th>Stav</th>
-                    </tr>
-                </thead>
-                <tbody id="event-history">
-                    <tr>
-                        <td colspan="4" class="empty-message">Žádné záznamy</td>
-                    </tr>
-                </tbody>
-            </table>
-            <button class="button" id="clear-history-btn">Smazat Historii</button>
+        <div class="card user-management">
+            <h2>User Management for RFID Cards</h2>
+            <p>Manage user access through RFID cards.</p>
         </div>
-
-        <!-- Statistics -->
-        <div class="stats-container">
-            <div class="stat-card">
-                <h3>Celkově Pokusů</h3>
-                <p id="total-attempts" class="stat-number">0</p>
-            </div>
-            <div class="stat-card">
-                <h3>Úspěšných</h3>
-                <p id="successful-attempts" class="stat-number success">0</p>
-            </div>
-            <div class="stat-card">
-                <h3>Zamítnutých</h3>
-                <p id="denied-attempts" class="stat-number danger">0</p>
-            </div>
-        </div>
-    </div>
-
-    <footer class="footer">
-        <p>&copy; 2026 Přístupový Systém | micro:bit + Web Serial API</p>
-    </footer>
-
-    <!-- Scripts -->
-    <script src="js/events.js"></script>
-    <script src="js/serial.js"></script>
-    <script src="js/ui.js"></script>
+    </main>
+    <script>
+        // Replace this with real chart drawing logic
+        function drawChart(chartId) {
+            const canvas = document.getElementById(chartId);
+            const ctx = canvas.getContext('2d');
+            ctx.fillStyle = 'rgba(0, 255, 0, 0.5)';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+        }
+        drawChart('eventMonitoringChart');
+        drawChart('statisticsChart');
+    </script>
 </body>
 </html>
