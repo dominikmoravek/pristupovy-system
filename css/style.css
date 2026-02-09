@@ -1,42 +1,30 @@
 .dashboard {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    background-color: #f4f4f4;
-    min-height: 100vh;
-    font-family: 'Arial', sans-serif;
-    color: #333;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
     padding: 20px;
 }
 
-.header {
-    width: 100%;
-    background-color: #007bff;
-    color: white;
-    padding: 15px;
-    text-align: center;
-}
-
-.card {
-    background-color: white;
+.dashboard-item {
+    background: #f4f4f4;
     border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    margin: 15px;
-    padding: 20px;
-    width: 300px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    padding: 15px;
+    transition: box-shadow 0.3s;
 }
 
-.button {
-    background-color: #28a745;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    padding: 10px 20px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
+.dashboard-item:hover {
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
 }
 
-.button:hover {
-    background-color: #218838;
+@media (max-width: 768px) {
+    .dashboard {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (min-width: 769px) and (max-width: 1200px) {
+    .dashboard {
+        grid-template-columns: repeat(2, 1fr);
+    }
 }
